@@ -7,7 +7,7 @@
     <MoreInfo>http://edua.rdomunoz.com/blog/editproj-visual-studio-extension-to-edit-project-files/</MoreInfo>
     <License>LICENSE.txt</License>
     <ReleaseNotes>RELEASE.TXT</ReleaseNotes>
-    <Tags>project,csproj</Tags>
+    <Tags>project,csproj,solution,sln,edit</Tags>
   </Metadata>
   <Installation InstalledByMsi="false">
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0,]" />

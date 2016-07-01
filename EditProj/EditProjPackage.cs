@@ -43,8 +43,8 @@ namespace rdomunozcom.EditProj
             if (null != mcs)
             {
                 // Create the command for the menu item.
-                CommandID menuCommandID = new CommandID(GuidList.guidEditProjCmdSet, (int)PkgCmdIDList.editProjFile);
-                var menuItem = new MenuCommand(MenuItemCallback, menuCommandID);
+                var editProjMenuItem = new MenuCommand(ProjMenuItemCallback, new CommandID(GuidList.EditProjCmdSetId, (int)PkgCmdIDList.editProjFile));
+                var editSlnMenuItem = new MenuCommand(SlnMenuItemCallback, new CommandID(GuidList.EditSlnCmdSetId, (int)PkgCmdIDList.editSlnFile));
 
                 this.dte = this.GetService(typeof(DTE)) as DTE;
                 // need to keep a strong reference to CommandEvents so that it's not GC'ed
@@ -59,41 +59,59 @@ namespace rdomunozcom.EditProj
 
                 this.saveAllCommand.AfterExecute += saveCommands_AfterExecute;
                 this.exitCommand.BeforeExecute += exitCommand_BeforeExecute;
-                mcs.AddCommand(menuItem);
+                mcs.AddCommand(editProjMenuItem);
+                mcs.AddCommand(editSlnMenuItem);
             }
         }
 
-        private void MenuItemCallback(object sender, EventArgs e)
+        private void ProjMenuItemCallback(object sender, EventArgs e)
         {
             try
             {
-                string projFilePath = GetPathOfSelectedItem();
-                string tempProjFilePath;
-
-                if (TempFileExists(projFilePath, out tempProjFilePath))
-                {
-                    tempProjFilePath = GetTempFileFor(projFilePath);
-                }
-                else
-                {
-                    //can delete this if?
-                    if (tempProjFilePath != null)
-                    {
-                        this.tempToProjFiles.Remove(tempProjFilePath);
-                    }
-
-                    tempProjFilePath = GetNewTempFilePath(projFilePath);
-                    this.tempToProjFiles[tempProjFilePath] = projFilePath;
-                }
-
-                CreateTempFileWithContentsOf(projFilePath, tempProjFilePath);
-                OpenFileInEditor(tempProjFilePath);
+                OpenSelectedFile(GetPathOfSelectedProject(), false);
             }
 
             catch (Exception ex)
             {
-                Debug.WriteLine(string.Format("There was an exception: {0}", ex));
+                Debug.WriteLine($"There was an exception: {ex}");
             }
+        }
+
+        private void SlnMenuItemCallback(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenSelectedFile(this.dte.Solution.FullName, true);
+            }
+
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"There was an exception: {ex}");
+            }
+        }
+
+        private void OpenSelectedFile(string selectedFilePath, bool isSln)
+        {
+            string tempProjFilePath;
+
+            if (TempFileExists(selectedFilePath, out tempProjFilePath))
+            {
+                tempProjFilePath = GetTempFileFor(selectedFilePath);
+            }
+            else
+            {
+                //can delete this if?
+                if (tempProjFilePath != null)
+                {
+                    this.tempToProjFiles.Remove(tempProjFilePath);
+                }
+
+                tempProjFilePath = GetNewTempFilePath(selectedFilePath, isSln);
+                this.tempToProjFiles[tempProjFilePath] = selectedFilePath;
+            }
+
+            CreateTempFileWithContentsOf(selectedFilePath, tempProjFilePath);
+            OpenFileInEditor(tempProjFilePath);
         }
 
         private string GetTempFileFor(string projFilePath)
@@ -101,10 +119,8 @@ namespace rdomunozcom.EditProj
             return this.tempToProjFiles.FirstOrDefault(kv => kv.Value == projFilePath).Key;
         }
 
-        private string GetPathOfSelectedItem()
+        private string GetPathOfSelectedProject()
         {
-            IVsUIShellOpenDocument openDocument = Package.GetGlobalService(typeof(SVsUIShellOpenDocument)) as IVsUIShellOpenDocument;
-
             IVsMonitorSelection monitorSelection = Package.GetGlobalService(typeof(SVsShellMonitorSelection)) as IVsMonitorSelection;
 
             IVsMultiItemSelect multiItemSelect = null;
@@ -116,7 +132,6 @@ namespace rdomunozcom.EditProj
             hr = monitorSelection.GetCurrentSelection(out hierarchyPtr, out itemid, out multiItemSelect, out selectionContainerPtr);
 
             IVsHierarchy hierarchy = Marshal.GetObjectForIUnknown(hierarchyPtr) as IVsHierarchy;
-            IVsUIHierarchy uiHierarchy = hierarchy as IVsUIHierarchy;
 
             // Get the file path
             string projFilePath = null;
@@ -124,10 +139,10 @@ namespace rdomunozcom.EditProj
             return projFilePath;
         }
 
-        private static string GetNewTempFilePath(string projFilePath)
+        private static string GetNewTempFilePath(string projFilePath, bool isSlnFile)
         {
             string tempDir = Path.GetTempPath();
-            string tempProjFile = Path.GetFileName(projFilePath) + ".xml";
+            string tempProjFile = $"{Path.GetFileName(projFilePath)}{(isSlnFile ? ".txt" : ".xml")}";
             string tempProjFilePath = Path.Combine(tempDir, tempProjFile);
             return tempProjFilePath;
         }
@@ -161,10 +176,10 @@ namespace rdomunozcom.EditProj
         {
             switch ((uint)ID)
             {
-                case (uint)Microsoft.VisualStudio.VSConstants.VSStd97CmdID.SaveProjectItem:
+                case (uint)VSConstants.VSStd97CmdID.SaveProjectItem:
                         UpdateProjFile(dte.ActiveWindow.Document.FullName);
                         break;
-                case (uint)Microsoft.VisualStudio.VSConstants.VSStd97CmdID.SaveSolution:
+                case (uint)VSConstants.VSStd97CmdID.SaveSolution:
                     foreach (string tempProjFile in this.tempToProjFiles.Keys)
                     {
                         UpdateProjFile(tempProjFile);
@@ -267,10 +282,18 @@ namespace rdomunozcom.EditProj
 
         private void NotifyDocChanged(string filePath)
         {
-            IVsFileChangeEx fileChangeEx =
-              (IVsFileChangeEx)GetService(typeof(SVsFileChangeEx));
-            int hr;
-            hr = fileChangeEx.SyncFile(filePath);
+            if (filePath.EndsWith(".sln"))
+            {
+                this.dte.Solution.Close(true);
+                this.dte.Solution.Open(filePath);
+                OpenSelectedFile(filePath, true);
+            }
+            else
+            {
+                IVsFileChangeEx fileChangeEx = (IVsFileChangeEx) GetService(typeof(SVsFileChangeEx));
+                int hr;
+                hr = fileChangeEx.SyncFile(filePath);
+            }
         }
     }
 }

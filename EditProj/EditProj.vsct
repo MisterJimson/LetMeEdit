@@ -1,13 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-
   <Extern href="stdidcmd.h"/>
   <Extern href="vsshlids.h"/>
-
   <Commands package="guidEditProjPkg">
-
     <Buttons>
-      <Button guid="guidEditProjCmdSet" id="editProjFile" priority="0x0050" type="Button">
+      
+      <Button guid="EditProjCmdSetId" id="editProjFile" priority="0x0050" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_PROPERTIES" />
         <Icon guid="pencilIcon" id="pencil" />
         <CommandFlag>DynamicVisibility</CommandFlag>
@@ -15,24 +13,35 @@
           <ButtonText>Edit Project File</ButtonText>
         </Strings>
       </Button>
-   
+      
+      <Button guid="EditSlnCmdSetId" id="editSlnFile" priority="0x0050" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_SOLUTION_PROPERTIES" />
+        <Icon guid="pencilIcon" id="pencil" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Edit Solution File</ButtonText>
+        </Strings>
+      </Button>
+      
     </Buttons>
     <Bitmaps>
       <Bitmap guid="pencilIcon" href="Resources\PencilTool_206_24.bmp" usedList="pencil"/>
     </Bitmaps>
- 
   </Commands>
-
   <Symbols>
     <!-- This is the package guid. -->
     <GuidSymbol name="guidEditProjPkg" value="{67374493-7f41-4665-bb0f-9ce9ede3fe7b}" />
-    <GuidSymbol name="guidEditProjCmdSet" value="{d2f70dae-9a2d-47e1-a470-7354a552821c}">
+    
+    <GuidSymbol name="EditProjCmdSetId" value="{d2f70dae-9a2d-47e1-a470-7354a552821c}">
       <IDSymbol name="editProjFile" value="0x0100" />
+    </GuidSymbol>
+    
+    <GuidSymbol name="EditSlnCmdSetId" value="{4cad5c42-61dd-47f9-a605-bb9c469dc962}">
+      <IDSymbol name="editSlnFile" value="0x0101" />
     </GuidSymbol>
 
     <GuidSymbol name="pencilIcon" value="{082977a6-a7f5-492d-a5ed-cf6cc86c03e4}" >
       <IDSymbol name="pencil" value="1" />
     </GuidSymbol>
   </Symbols>
-
 </CommandTable>
