@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace rdomunozcom.EditProj
+﻿namespace LetMeEdit
 {
     static class PkgCmdIDList
     {

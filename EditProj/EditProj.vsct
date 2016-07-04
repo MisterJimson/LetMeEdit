@@ -4,7 +4,7 @@
   <Extern href="vsshlids.h"/>
   <Commands package="guidEditProjPkg">
     <Buttons>
-      
+
       <Button guid="EditProjCmdSetId" id="editProjFile" priority="0x0050" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_PROJECT_PROPERTIES" />
         <Icon guid="pencilIcon" id="pencil" />
@@ -13,7 +13,7 @@
           <ButtonText>Edit Project File</ButtonText>
         </Strings>
       </Button>
-      
+
       <Button guid="EditSlnCmdSetId" id="editSlnFile" priority="0x0050" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_CTXT_SOLUTION_PROPERTIES" />
         <Icon guid="pencilIcon" id="pencil" />
@@ -22,7 +22,7 @@
           <ButtonText>Edit Solution File</ButtonText>
         </Strings>
       </Button>
-      
+
     </Buttons>
     <Bitmaps>
       <Bitmap guid="pencilIcon" href="Resources\PencilTool_206_24.bmp" usedList="pencil"/>
@@ -30,12 +30,12 @@
   </Commands>
   <Symbols>
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidEditProjPkg" value="{67374493-7f41-4665-bb0f-9ce9ede3fe7b}" />
-    
+    <GuidSymbol name="guidEditProjPkg" value="{e6731de7-78c4-45f9-bce0-e66023e6dcc2}" />
+
     <GuidSymbol name="EditProjCmdSetId" value="{d2f70dae-9a2d-47e1-a470-7354a552821c}">
       <IDSymbol name="editProjFile" value="0x0100" />
     </GuidSymbol>
-    
+
     <GuidSymbol name="EditSlnCmdSetId" value="{4cad5c42-61dd-47f9-a605-bb9c469dc962}">
       <IDSymbol name="editSlnFile" value="0x0101" />
     </GuidSymbol>

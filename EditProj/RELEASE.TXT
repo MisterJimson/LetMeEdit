@@ -1,20 +1,8 @@
-Version 1.1.3
-=============
-Fix for users with VS2012.
-
-Version 1.1.2
-=============
-Fix for some users for which the paths change case.
-
-Version 1.1.1
-=============
-Fix for stale project file.
-
-Version 1.1.0
-=============
-* Fix for project files that are read-only, e.g., under source control and need to be checked out.
-* New icon
-
 Version 1.0.0
 =============
-First functioning version
+
+Forked from EditProj 1.1.3
+
+Added solution file editing
+
+Added file name to tab title
