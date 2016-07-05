@@ -1,15 +1,14 @@
-#editProjFiles
-This package allows you to edit project files without the need to unload them first.
+#LetMeEdit
 
-In the Solution Explorer, right click on a Project item and select "Edit Project File". The project file will then open; after saving it, Visual Studio will prompt you to reload the project.
+Fork of EditProj.
 
-Read more [here](http://edua.rdomunoz.com/blog/editproj-visual-studio-extension-to-edit-project-files/).
+This is a Visual Studio extention that lets you edit project and solution files without having to unload or close them first. It will automatically reload when you save.
 
-<img src=http://edua.rdomunoz.com/images/blog/editprojanimated.gif>
+In the Solution Explorer, right click on a Project or Solution item and select "Edit File". The file will then open; after saving it, Visual Studio will prompt you to reload the required projects.
+
 
 ## Intallation
-Install it from the [Visual Studio Gallery](http://visualstudiogallery.msdn.microsoft.com/b346d9de-8722-4b0e-b50e-9ae9add9fca8).
+Install it from the [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/2d9dc963-371d-4e12-a160-0c70a855a8e3).
 
 ## Licensing
-[MIT License](https://github.com/dud5/editProjFiles/blob/master/LICENSE).
-The pencil icon comes from the [Visual Studio Image Library](http://msdn.microsoft.com/en-us/library/ms246582.aspx).
+[MIT License](https://github.com/MisterJimson/editProjFiles/blob/master/LICENSE).
