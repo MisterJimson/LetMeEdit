@@ -1,3 +1,8 @@
+Version 1.0.1
+=============
+
+Encoding is no longer lost when saving. (Issue #1)
+
 Version 1.0.0
 =============
 
