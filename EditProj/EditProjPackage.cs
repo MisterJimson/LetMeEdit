@@ -169,7 +169,7 @@ namespace LetMeEdit
 
         private void OpenFileInEditor(string filePath)
         {
-            this.dte.ExecuteCommand("File.OpenFile", filePath);
+            this.dte.ExecuteCommand("File.OpenFile", "\""+filePath+"\"");
         }
 
         private void saveCommands_AfterExecute(string Guid, int ID, object CustomIn, object CustomOut)
