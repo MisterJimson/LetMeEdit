@@ -1,3 +1,13 @@
+Version 1.1.0
+=============
+
+VS 2017 RC support. (Issue #2)
+
+Version 1.0.1
+=============
+
+Encoding is no longer lost when saving. (Issue #1)
+
 Version 1.0.0
 =============
 

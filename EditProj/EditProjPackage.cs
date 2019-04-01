@@ -149,8 +149,8 @@ namespace LetMeEdit
 
         private static void CreateTempFileWithContentsOf(string sourcePath, string destPath)
         {
-            string projectData = File.ReadAllText(sourcePath);
-            File.WriteAllText(destPath, projectData);
+            byte[] projectData = File.ReadAllBytes(sourcePath);
+            File.WriteAllBytes(destPath, projectData);
         }
 
         private bool TempFileExists(string projFilePath, out string tempProjFile)
@@ -214,7 +214,7 @@ namespace LetMeEdit
 
         private void UpdateProjFile(string tempFilePath)
         {
-            string contents = ReadFile(tempFilePath);
+            byte[] contents = ReadFile(tempFilePath);
             string projFile = this.tempToProjFiles[tempFilePath];
             if (CanEditFile(this.tempToProjFiles[tempFilePath]))
             {
@@ -232,14 +232,14 @@ namespace LetMeEdit
             hr = queryEditQuerySave.QuerySaveFile(filePath, 0, null, out result);
         }
 
-        private static void SetFileContents(string filePath, string content)
+        private static void SetFileContents(string filePath, byte[] content)
         {
-            File.WriteAllText(filePath, content);
+            File.WriteAllBytes(filePath, content);
         }
 
-        private static string ReadFile(string filePath)
+        private static byte[] ReadFile(string filePath)
         {
-            return File.ReadAllText(filePath);
+            return File.ReadAllBytes(filePath);
         }
 
         private bool CanEditFile(string filePath)
