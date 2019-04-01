@@ -8,7 +8,7 @@ In the Solution Explorer, right click on a Project or Solution item and select "
 
 
 ## Intallation
-Install it from the [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/2d9dc963-371d-4e12-a160-0c70a855a8e3).
+Install it from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=JasonRai.LetMeEdit).
 
 ## Licensing
 [MIT License](https://github.com/MisterJimson/editProjFiles/blob/master/LICENSE).
