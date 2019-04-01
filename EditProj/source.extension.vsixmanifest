@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
-  <Metadata>
-    <Identity Id="e6731de7-78c4-45f9-bce0-e66023e6dcc2" Version="1.1.0" Language="en-US" Publisher="Jason Rai" />
-    <DisplayName>LetMeEdit</DisplayName>
-    <Description xml:space="preserve">This package allows you to edit project and solution files without the need to unload them first.</Description>
-    <License>LICENSE.txt</License>
-    <ReleaseNotes>RELEASE.TXT</ReleaseNotes>
-    <Tags>project,csproj,solution,sln,edit</Tags>
-  </Metadata>
-  <Installation InstalledByMsi="false">
-    <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[11.0,]" />
-    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0,]" />
-    <InstallationTarget Id="Microsoft.VisualStudio.Enterprise" Version="[11.0,]" />
-  </Installation>
-  <Dependencies>
-    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
-  </Dependencies>
-  <Assets>
-    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
-  </Assets>
-  <Prerequisites>
-    <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,)" DisplayName="Visual Studio core editor" />
-  </Prerequisites>
+    <Metadata>
+        <Identity Id="e6731de7-78c4-45f9-bce0-e66023e6dcc2" Version="1.2.0" Language="en-US" Publisher="Jason Rai" />
+        <DisplayName>LetMeEdit</DisplayName>
+        <Description xml:space="preserve">This package allows you to edit project and solution files without the need to unload them first.</Description>
+        <License>LICENSE.txt</License>
+        <ReleaseNotes>RELEASE.TXT</ReleaseNotes>
+        <Tags>project,csproj,solution,sln,edit</Tags>
+    </Metadata>
+    <Installation InstalledByMsi="false">
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[11.0,]" />
+        <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0,]" />
+        <InstallationTarget Id="Microsoft.VisualStudio.Enterprise" Version="[11.0,]" />
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+    </Dependencies>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+    </Assets>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,)" DisplayName="Visual Studio core editor" />
+    </Prerequisites>
 </PackageManifest>
